@@ -1,0 +1,28 @@
+# Default fallback policy for any domain not explicitly listed
+default:
+  fetcher: static          # 'static' or 'playwright'
+  respect_robots: true
+  rate_limit_rps: 1.0      
+  timeout: 20
+  allowed_paths: []        # Empty means allow all
+  denied_paths: ["/search", "/login", "/admin", "/cart", "/user/"]
+  
+# Specific overrides for known domains
+domains:
+  fastapi.tiangolo.com:
+    fetcher: static
+    rate_limit_rps: 2.0
+    allowed_paths: ["/tutorial/", "/advanced/", "/deployment/", "/reference/"]
+    denied_paths: ["/release-notes/", "/blog/"]
+    
+  docs.python.org:
+    fetcher: static
+    rate_limit_rps: 1.5
+    
+  react.dev:
+    fetcher: static
+    rate_limit_rps: 1.0
+  
+  en.wikipedia.org:
+    allowed_paths: ["/wiki/Python_(programming_language)"]
+    denied_paths: ["/wiki/Talk:"]
